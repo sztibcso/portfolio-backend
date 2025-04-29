@@ -10,7 +10,7 @@ const projects = [
   {
     id: 1,
     frontImage: "https://via.placeholder.com/300x450",
-    description: "Ez az első projekt backendből!",
+    description: "Ez az első projekt backendből.",
     linkImage: "https://via.placeholder.com/50",
     linkUrl: "https://example.com/project1",
   },
