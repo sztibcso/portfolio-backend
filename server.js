@@ -7,7 +7,11 @@ import "dotenv/config";
 const app = express();
 const PORT = 5000;
 
-app.use(cors());
+app.use(cors({
+  origin: ["https://tibcso.dev", "http://localhost:3000"],
+  methods: ["POST", "GET"],
+  allowedHeaders: ["Content-Type"],
+}));
 
 app.use(bodyParser.json());
 
