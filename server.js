@@ -1,10 +1,15 @@
 import express from "express";
 import cors from "cors";
+import nodemailer from "nodemailer";
+import bodyParser from "body-parser";
+import "dotenv/config";
 
 const app = express();
 const PORT = 5000;
 
 app.use(cors());
+
+app.use(bodyParser.json());
 
 const projects = [
   {
@@ -28,3 +33,35 @@ app.get("/api/projects", (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+
+app.post("/api/contact", async (req, res) => {
+  const { name, email, message } = req.body;
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail", // vagy smtp, ha más e-mail szolgáltatót használsz
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
+      },
+    });
+
+    await transporter.sendMail({
+      from: email,
+      to: process.env.MAIL_USER,
+      subject: `New message from ${name}`,
+      html: `<p><strong>Name:</strong> ${name}</p>
+             <p><strong>Email:</strong> ${email}</p>
+             <p><strong>Message:</strong><br/>${message}</p>`,
+    });
+
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.error("Email error:", err);
+    res.status(500).json({ error: "Email sending failed" });
+  }
+});
