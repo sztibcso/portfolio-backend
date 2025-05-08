@@ -43,10 +43,12 @@ app.post("/api/contact", async (req, res) => {
 
   try {
     const transporter = nodemailer.createTransport({
-      service: "gmail", // vagy smtp, ha más e-mail szolgáltatót használsz
+      service: "mail.privateemail.com", 
+      port: 465, // vagy 587
+      secure: true, // true a 465-höz, false a 587-hez
       auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS,
+        user: process.env.MAIL_USER, // hello@tibcso.dev
+        pass: process.env.MAIL_PASS, // a jelszó
       },
     });
 
