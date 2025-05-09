@@ -31,14 +31,14 @@ export default async function handler(req, res) {
         });
 
         await transporter.sendMail({
-            from: email,
+            from: process.env.MAIL_USER, 
+            replyTo: email, 
             to: process.env.MAIL_USER,
             subject: `New message from ${name}`,
             html: `<p><strong>Name:</strong> ${name}</p>
-             <p><strong>Email:</strong> ${email}</p>
-             <p><strong>Message:</strong><br/>${message}</p>`
+                   <p><strong>Email:</strong> ${email}</p>
+                   <p><strong>Message:</strong><br/>${message}</p>`,
         });
-
         res.status(200).json({ success: true });
     } catch (err) {
         console.error("Email error:", err);
