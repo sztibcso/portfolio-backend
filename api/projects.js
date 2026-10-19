@@ -4,10 +4,10 @@ export default function handler(req, res) {
   const projects = [
     {
       id: 1,
-      frontImage: "https://portfolio-szalontai-tibors-projects.vercel.app/images/angular.png", // Angular
-      description: "An Angular project descripton",
-      linkImage: "https://portfolio-szalontai-tibors-projects.vercel.app/images/coming-soon.png", // Coming Soon
-      linkUrl: "/coming-soon",
+      frontImage: "https://portfolio-szalontai-tibors-projects.vercel.app/images/sql-playground.png", // SQL Playground
+      description: "Real PostgreSQL in the browser: a ticketing data model with PK/FK constraints, joins and window functions you can run and break yourself.",
+      linkImage: "https://portfolio-szalontai-tibors-projects.vercel.app/images/open.png", // Coming Soon
+      linkUrl: "/sql-playground",
     },
     {
       id: 2,
